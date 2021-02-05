@@ -1,0 +1,49 @@
+#. The experiment or the project has been done in Windows 10, RAM 16GB, GPU 1050ti 4GB - Laptop.
+#. To run this experiment on Windows please follow SECTION 1 and SECTION 2 below.
+#. To run this experiment on Linux you must need to generate .npy file accoring to your destination and .scp files accoring to your destination.
+#. To generate .npy and .scp files, the code has been given in Scripts folder.
+#. The model file is include for both of the datasets in exp folder.Before traing please empty the exp folder files otherwise the model file will be overwrite.
+#. Experimented result and graphs are included in Result folder
+#. All project files are inculded in Project folder
+
+SECTION 1:FOR TIMIT Dataset
+
+1. To train TIMIT_Dataset run Preparation.py to convert all file and folders name in lower case but 
+here the convertion has been done in OUTPUT_TIMIT folder. 
+
+2.cmd commend: python TIMIT_preparation.py TIMIT_FOLDER OUTPUT_TIMIT data_lists/TIMIT_all.scp
+	where:
+	$TIMIT_FOLDER is the folder of the original TIMIT corpus
+	$OUTPUT_TIMIT is the folder in which the normalized TIMIT will be stored
+	data_lists/TIMIT_all.scp is the list of the TIMIT files used for training/test the speaker id system.
+
+3. Run the speaker id experiment.
+
+	Modify the [data] section of cfg/SincNet_TIMIT.cfg file according to your paths. 
+		In particular, modify the data_folder with the OUTPUT_FOLDER specified during the TIMIT preparation. 
+		The other parameters of the config file belong to the following sections:
+	[windowing], that defines how each sentence is split into smaller chunks.
+	[cnn], that specifies the characteristics of the CNN architecture.
+	[dnn], that specifies the characteristics of the fully-connected DNN architecture following the CNN layers.
+	[class], that specify the softmax classification part.
+	[optimization], that reports the main hyperparameters used to train the architecture.
+Once setup the cfg file, you can run the speaker id experiments using the following command: python Traing_id.py --cfg=cfg/SincNet_TIMIT.cfg
+
+
+SECTION 2:FOR Bengali_ASR dataset
+
+1. All sorted files with their classes stored in OUTPUT_BENGALI folder. 
+
+2 Run commend: python Preparation.py T_BENGALI OUTPUT_BENGALI data_lists/ben_all.scp 
+	This step is necessary to store a version of Bengali ASR in which start and end silences are removed and the amplitude of each speech utterance is normalized.
+3.Run the speaker id experiment.
+
+	Modify the [data] section of cfg/Bengali_ASR.cfg file according to your paths. 
+		In particular, modify the data_folder with the OUTPUT_FOLDER specified during the TIMIT preparation. 
+		The other parameters of the config file belong to the following sections:
+	[windowing], that defines how each sentence is split into smaller chunks.
+	[cnn], that specifies the characteristics of the CNN architecture.
+	[dnn], that specifies the characteristics of the fully-connected DNN architecture following the CNN layers.
+	[class], that specify the softmax classification part.
+	[optimization], that reports the main hyperparameters used to train the architecture.
+Once setup the cfg file, you can run the speaker id experiments using the following command: python Traing_id.py --cfg=cfg/Bengali_ASR.cfg

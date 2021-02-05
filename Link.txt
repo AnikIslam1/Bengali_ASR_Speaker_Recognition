@@ -1,0 +1,6 @@
+Bengali_ASR organized and sorted data according to the class(userid).
+Total class - 508
+Total files - 127565 (.wav)
+Google Drive link of the dataset (Access with NSU Email)
+
+https://drive.google.com/file/d/1_dW_3WNacULl-thZ5Q9p97lmFGvHuhXs/view?usp=sharing
